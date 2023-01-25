@@ -2,7 +2,7 @@ import streamlit as st
 import joblib,os
 import spacy
 import pandas as pd
-nlp = spacy.load('en')
+nlp = spacy.load('en_core_web_lg')
 import matplotlib.pyplot as plt 
 import matplotlib
 matplotlib.use("Agg")

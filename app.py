@@ -134,6 +134,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
-# By Jesse E.Agbe(JCharis)
-# Jesus Saves@JCharisTech

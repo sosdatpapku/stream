@@ -3,6 +3,8 @@
 streamlit for last project  
 ![github](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=GitHub&logoColor=white)]  
 
-![github](https://img.shields.io/badge/GitHub-#3776AB?style=for-the-badge&logo=GitHub&logoColor=white)]  
-![<#3776AB>](https://img.shields.io/badge/<Badge Text>-<Background Color>?style=for-the-badge&logo=<Icon Name>&logoColor=<Logo Color>)
+![github](https://img.shields.io/badge/GitHub-#3776AB?style=for-the-badge&logo=GitHub&logoColor=white)]    
+
+![github](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=#3776AB=white)]  
+![github](https://img.shields.io/badge/GitHub-000000?style=#3776AB=GitHub&logoColor=white)]
 Данная программа использует самую большую модель (lg) spaCy на английском языке https://spacy.io/models/en  

@@ -13,6 +13,7 @@ cycler==0.11.0
 cymem==2.0.7
 decorator==5.1.1
 en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.5.0/en_core_web_lg-3.5.0-py3-none-any.whl
+ru-core-news-lg @ https://github.com/explosion/spacy-models/releases/download/ru_core_news_lg-3.5.0/ru_core_news_lg-3.5.0-py3-none-any.whl
 entrypoints==0.4
 fonttools==4.38.0
 gitdb==4.0.10

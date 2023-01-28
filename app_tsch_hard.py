@@ -46,10 +46,12 @@ def main():
             # ------------------------------------------------
             listNoun = []
             listVerb = []
+            listPropn = []
             listFin = []
             listNoun = [token.lemma_ for token in docx if token.pos_ == "NOUN"]
             listVerb = [token.lemma_ for token in docx if token.pos_ == "VERB"]
-            listFin = listNoun + listVerb
+            listPropn = [token.lemma_ for token in docx if token.pos_ == "PROPN"]
+            listFin = listNoun + listVerb + listPropn
 
             c_text = ' '.join(listFin)
             wordcloud = WordCloud(colormap='Set2').generate(c_text)
@@ -81,10 +83,12 @@ def main():
             # ------------------------------------------------
             listNoun = []
             listVerb = []
+            listPropn = []
             listFin = []
             listNoun = [token.lemma_ for token in docx if token.pos_ == "NOUN"]
             listVerb = [token.lemma_ for token in docx if token.pos_ == "VERB"]
-            listFin = listNoun + listVerb
+            listPropn = [token.lemma_ for token in docx if token.pos_ == "PROPN"]
+            listFin = listNoun + listVerb + listPropn
 
             c_text = ' '.join(listFin)
             wordcloud = WordCloud(colormap='Set2').generate(c_text)

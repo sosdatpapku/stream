@@ -1,14 +1,11 @@
 import streamlit as st
-import joblib
-import os
 import spacy
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
+from wordcloud import WordCloud
 
 matplotlib.use("Agg")
-from PIL import Image
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 
 nlp_rus = spacy.load('ru_core_news_lg')  # модель для русского язык
 

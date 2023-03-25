@@ -9,7 +9,7 @@ class AppUser(HttpUser):
     def home_page(self):
         self.client.get('/')
 
-  
+
 """
 Locust используется для тестирования производительности работы
 web-приложения на облаке Streamlit.

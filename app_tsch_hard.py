@@ -1,14 +1,11 @@
 import streamlit as st
-
-
 import spacy
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
+from wordcloud import WordCloud
 
 matplotlib.use("Agg")
-
-from wordcloud import WordCloud
 
 nlp_rus = spacy.load('ru_core_news_lg')  # модель для русского язык
 nlp = spacy.load('en_core_web_lg')  # модель для английского языка

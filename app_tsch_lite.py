@@ -12,7 +12,7 @@ nlp_rus = spacy.load('ru_core_news_lg')  # модель для русского 
 
 def main():
     """"""
-    #st.title('!!! Добро пожаловать !!!')
+# st.title('!!! Добро пожаловать !!!')
 
     st.markdown("<h1 style='text-align: center;'>!!! Добро пожаловать !!!</h1>", unsafe_allow_html=True)
 
@@ -34,7 +34,7 @@ def main():
 
         new_df = pd.DataFrame(zip(c_tokens, c_lemma, c_pos, c_dep, c_ent),
                               columns=['Токены', 'Лемма', 'Часть речи', 'Зависимость', 'Сущность'])
-#------------------------------------------------
+# ------------------------------------------------
         listNoun = []
         listVerb = []
         listFin = []
@@ -54,7 +54,7 @@ def main():
         st.dataframe(xxxx)
         st.dataframe(new_df)
 
-    st.sidebar.subheader('''Исполнители: группа №12: 
+        st.sidebar.subheader('''Исполнители: группа №12:
     Зайцев Александр Васильевич
     Чурилов Алексей Александрович
     Зайцев Антон Александрович''')

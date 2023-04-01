@@ -23,5 +23,5 @@ streamlit run app_tsch.py
 locust -f locust_test.py
 And go to the link http://localhost:8089
 
-Alex Zaitsev
+Alex Zaitsev, Alex Churilov
 """

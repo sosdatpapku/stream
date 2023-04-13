@@ -1,0 +1,17 @@
+# защищаю как могу
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+# и что бы мусор не тянулся
+#anton_venv
+__init__.py
+__pycache__
+tests
+poetry.lock
+pyproject.toml
+vk_parsing.py
+test.py

@@ -113,20 +113,21 @@ def main():
     domain = st.text_input(
         'Введите короткий адрес пользователя или сообщества "-"', 'habr'
         )
-    # raw_text = st.text_area("Введите текст на русском языке", "поле ввода")
+
     if st.button("Проанализировать новостные заголовки"):
 
-        api = vk.API(access_token=os.getenv('TOKEN'))  # адрес токена вк
-        posts = api.wall.get(domain=domain, count=count, v=5.151)
-        # -15755094, 20629724
-
-        all_news = []  # переменная для добавления всех заголовков новостями
-        for post in posts['items']:
-            all_news.append(post['text'])  # добавляю все заголовки в один
-
         try:
+            api = vk.API(access_token=os.getenv('TOKEN'))  # адрес токена вк
+            posts = api.wall.get(domain=domain, count=count, v=5.151)
+            # -15755094, 20629724
+
+            all_news = []  # список для добавления всех заголовков новостями
+            for post in posts['items']:
+                all_news.append(post['text'])  # добавляю все заголовки в один
+
             text_analizer_rus_st(str(all_news))
             # подаём на функцию данные одновременно переводя их в тип str
+
         except:
             st.markdown('Что-то пошло не так')
 

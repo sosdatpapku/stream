@@ -38,7 +38,7 @@ def text_analizator_rus(text_in):
 
     text = remove_incor_symbols(text_in)
 
-    nlp_rus = spacy.load('ru_core_news_md')  # модель для русского языка
+    nlp_rus = spacy.load('ru_core_news_lg')  # модель для русского языка
     analysis_result = nlp_rus(text)
 
     c_tokens = [token.text for token in analysis_result]

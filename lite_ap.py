@@ -5,20 +5,42 @@ import matplotlib.pyplot as plt
 import matplotlib
 from wordcloud import WordCloud
 ##
-import os #для импорта токена
-import vk_token #для импорта токена
-import vk #импорт специализированной библиотеки для парсинга текста
+import os  # для импорта токена
+import vk_token  # для импорта токена
+import vk  # импорт специализированной библиотеки для парсинга текста
 ##
 
 matplotlib.use("Agg")
 
 
-# функция выполняет анализ текста и возвращает датафрейм с его характеристиками
-def text_analizator_rus(text):
+def remove_incor_symbols(text_incor):
+    # функция, оставляющая в строке только русские буквы и пробелы
+
+    text_incor = text_incor.lower()
+
+    cor_symbols = [" "]
+
+    for i in range(ord('а'), ord('я')):
+        cor_symbols.append(chr(i))
+
+    text_cor = ""
+
+    for symbol in text_incor:
+        if symbol in cor_symbols:
+            text_cor += symbol
+
+    return(text_cor)
+
+
+def text_analizator_rus(text_in):
+    '''функция выполняет анализ текста и
+    возвращает датафрейм с его характеристиками'''
+
+    text = remove_incor_symbols(text_in)
 
     nlp_rus = spacy.load('ru_core_news_md')  # модель для русского языка
     analysis_result = nlp_rus(text)
-    
+
     c_tokens = [token.text for token in analysis_result]
     c_lemma = [token.lemma_ for token in analysis_result]
     c_pos = [token.pos_ for token in analysis_result]
@@ -33,6 +55,7 @@ def text_analizator_rus(text):
 
 
 def make_word_cloud(text):
+    # функция выводит "облако слов"
 
     wordcloud = WordCloud(colormap='Set2').generate(text)
     plt.imshow(wordcloud, interpolation='bilinear')
@@ -40,6 +63,23 @@ def make_word_cloud(text):
     st.set_option('deprecation.showPyplotGlobalUse', False)
     # чтобы убрать предупреждение
     st.pyplot()
+
+    return None
+
+
+def text_analizer_rus_st(text_in, part_of_speach=["NOUN", "VERB"]):
+    '''функция выполняет анализ текста и выводит результат с использованием
+библиотеки streamlit'''
+
+    res_of_analys = text_analizator_rus(text_in)
+
+    words = res_of_analys.loc[res_of_analys['Часть речи']
+                              .isin(part_of_speach), 'Токены'].tolist()
+    string_for_cloud = ' '.join(words)
+    make_word_cloud(string_for_cloud)
+
+    st.dataframe(res_of_analys['Часть речи'].value_counts().T)
+    st.dataframe(res_of_analys)
 
     return None
 
@@ -63,43 +103,34 @@ def main():
     st.info("Обработка естественного языка (на русском языке)")
     raw_text = st.text_area("Введите текст на русском языке", "поле ввода")
     if st.button("Проанализировать"):
+        try:
+            text_analizer_rus_st(raw_text)
+        except:
+            st.markdown('Введённые данные некорректны')
 
-        res_of_analys = text_analizator_rus(raw_text)
-
-        words = res_of_analys.loc[res_of_analys['Часть речи']
-                                  .isin(["NOUN", "VERB"]), 'Токены'].tolist()
-        string_for_cloud = ' '.join(words)
-        make_word_cloud(string_for_cloud)
-
-        st.dataframe(res_of_analys['Часть речи'].value_counts().T)
-        st.dataframe(res_of_analys)
-        
-        
     st.info("Обработка естественного языка (VK)")
     count = st.slider('Сколько новостных заголовков извлечь?', 1, 100, 5)
-    domain = st.text_input('Введите короткий адрес пользователя или сообщества "-"', 'habr')
-    #raw_text = st.text_area("Введите текст на русском языке", "поле ввода")
+    domain = st.text_input(
+        'Введите короткий адрес пользователя или сообщества "-"', 'habr'
+        )
+    # raw_text = st.text_area("Введите текст на русском языке", "поле ввода")
     if st.button("Проанализировать новостные заголовки"):
-        
-        api = vk.API(access_token=os.getenv('TOKEN'))  # адрес токена вк 
-        posts = api.wall.get(domain=domain, count=count,v=5.151) #-15755094,20629724
 
-        all_news = [] # переменная для добавления всех заголовков новостями
+        api = vk.API(access_token=os.getenv('TOKEN'))  # адрес токена вк
+        posts = api.wall.get(domain=domain, count=count, v=5.151)
+        # -15755094, 20629724
+
+        all_news = []  # переменная для добавления всех заголовков новостями
         for post in posts['items']:
-            all_news.append(post['text']) #добавляю все заголовки в один
-            #возникла проблема с удалением лишних элементов
+            all_news.append(post['text'])  # добавляю все заголовки в один
 
-        res_of_analys = text_analizator_rus(str(all_news)) #подаём на функцию данные одновременно переводя их в тип str
+        try:
+            text_analizer_rus_st(str(all_news))
+            # подаём на функцию данные одновременно переводя их в тип str
+        except:
+            st.markdown('Что-то пошло не так')
 
-        words = res_of_analys.loc[res_of_analys['Часть речи']
-                                  .isin(["NOUN", "VERB"]), 'Токены'].tolist()
-        string_for_cloud = ' '.join(words)
-        make_word_cloud(string_for_cloud)
-
-        st.dataframe(res_of_analys['Часть речи'].value_counts().T)
-        st.dataframe(res_of_analys)
-
-        st.sidebar.subheader('''Исполнители: группа №2:
+    st.sidebar.subheader('''Исполнители: группа №2:
     Зайцев Александр Васильевич
     Чурилов Алексей Александрович
     Зайцев Антон Александрович

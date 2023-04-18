@@ -17,8 +17,6 @@
 
 ![visitor badge](https://visitor-badge.glitch.me/badge?page_id=m6129&left_color=red&right_color=green)  
 
-![](https://visitor-badge.glitch.me/badge?page_id=m6129)
-
 
 
 

@@ -4,11 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 from wordcloud import WordCloud
-##
-import os  # для импорта токена
-import vk_token  # для импорта токена
 import vk  # импорт специализированной библиотеки для парсинга текста
-##
 
 matplotlib.use("Agg")
 
@@ -109,16 +105,20 @@ def main():
             st.markdown('Введённые данные некорректны')
 
     st.info("Обработка естественного языка (VK)")
+    token = st.text_input(
+        'Установите Ваш токен из Вашего приложения в vk (данное действие может быть небезопасно)', 'Например 2b83a7172b63a7656ghb7178428708a0522b632b63a7873f7c594b6fda2224149cvd0e'
+        )
     count = st.slider('Сколько новостных заголовков извлечь?', 1, 100, 5)
     domain = st.text_input(
-        'Введите короткий адрес пользователя или сообщества "-"', 'habr'
+        'Введите короткий адрес пользователя или сообщества', 'habr'
         )
 
     if st.button("Проанализировать новостные заголовки"):
-        
+
         try:
-            api = vk.API(access_token=os.getenv('TOKEN'))  # адрес токена вк
+            api = vk.API(access_token=token)  # адрес токена вк
             posts = api.wall.get(domain=domain, count=count, v=5.151)
+            # -15755094, 20629724
 
             all_news = []  # список для добавления всех заголовков новостями
             for post in posts['items']:

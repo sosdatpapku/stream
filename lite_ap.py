@@ -84,7 +84,7 @@ def text_analizer_rus_st(text_in, part_of_speach=["NOUN", "VERB"]):
     return None
 
 
-def main():
+def main_for_all(vk_api):
     """"""
 # st.title('!!! Добро пожаловать !!!')
 
@@ -117,7 +117,7 @@ def main():
     if st.button("Проанализировать новостные заголовки"):
         
         try:
-            api = vk.API(access_token=os.getenv('TOKEN'))  # адрес токена вк
+            api = vk_api  # адрес токена вк
             posts = api.wall.get(domain=domain, count=count, v=5.151)
 
             all_news = []  # список для добавления всех заголовков новостями
@@ -139,5 +139,3 @@ def main():
     return None
 
 
-if __name__ == '__main__':
-    main()

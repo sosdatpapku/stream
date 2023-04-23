@@ -13,14 +13,25 @@ import vk  # импорт специализированной библиоте�
 matplotlib.use("Agg")
 
 
+def replacement_punc_to_space(text_punc):
+    punc_list = '.;:!?/\,#@$&)(\'"'
+    replacement = ' ' * len(punc_list)
+
+    text_bez_punc = text_punc.translate(str.maketrans(punc_list, replacement))
+
+    return text_bez_punc
+
+
 def remove_incor_symbols(text_incor):
     # функция, оставляющая в строке только русские буквы и пробелы
-
+    
+    text_incor = replacement_punc_to_space(text_incor)
+    
     text_incor = text_incor.lower()
 
     cor_symbols = [" "]
 
-    for i in range(ord('а'), ord('я')):
+    for i in range(ord('а'), ord('я')+1):
         cor_symbols.append(chr(i))
 
     text_cor = ""

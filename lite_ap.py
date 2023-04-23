@@ -84,7 +84,7 @@ def text_analizer_rus_st(text_in, part_of_speach=["NOUN", "VERB"]):
     return None
 
 
-def main():
+def main_for_all(vk_api):
     """"""
 # st.title('!!! Добро пожаловать !!!')
 
@@ -110,6 +110,11 @@ def main():
 
     st.info("Обработка естественного языка (VK)")
     count = st.slider('Сколько новостных заголовков извлечь?', 1, 100, 5)
+    if vk_api == 'vk.API(access_token=token)':
+        token = st.text_input(
+            'Установите Ваш токен из Вашего приложения в vk         (данное действие может быть небезопасно)', 
+            'Например 2b83a7172b63a7656ghb7178428708a0522b632b63a7873f7c594b6fda2224149cvd0e'
+            )
     domain = st.text_input(
         'Введите короткий адрес пользователя или сообщества "-"', 'habr'
         )
@@ -117,7 +122,7 @@ def main():
     if st.button("Проанализировать новостные заголовки"):
         
         try:
-            api = vk.API(access_token=os.getenv('TOKEN'))  # адрес токена вк
+            api = eval(vk_api)  # адрес токена вк
             posts = api.wall.get(domain=domain, count=count, v=5.151)
 
             all_news = []  # список для добавления всех заголовков новостями
@@ -139,5 +144,3 @@ def main():
     return None
 
 
-if __name__ == '__main__':
-    main()

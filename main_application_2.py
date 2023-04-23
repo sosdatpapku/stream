@@ -1,4 +1,4 @@
-import lite_ap # импорт скрипта lite_ap.py
+import library_func # импорт скрипта library_func.py
 
 def main():
     
@@ -7,7 +7,7 @@ def main():
     except:  
         api_for = None
 
-    lite_ap.main_for_all(api_for)
+    library_func.main_for_all(api_for)
     
     return None
 

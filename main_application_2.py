@@ -3,7 +3,7 @@ import library_func # импорт скрипта library_func.py
 def main():
     
     try:
-        api_for = 'vk.API(access_token=os.getenv('TOKEN'))'  # адрес токена вк
+        api_for = "vk.API(access_token=os.getenv('TOKEN'))"  # адрес токена вк
     except:  
         api_for = None
 

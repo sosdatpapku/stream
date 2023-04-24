@@ -13,14 +13,25 @@ import vk  # импорт специализированной библиоте�
 matplotlib.use("Agg")
 
 
+def replacement_punc_to_space(text_punc):
+    punc_list = '.;:!?/\,#@$&)(\'"'
+    replacement = ' ' * len(punc_list)
+
+    text_bez_punc = text_punc.translate(str.maketrans(punc_list, replacement))
+
+    return text_bez_punc
+
+
 def remove_incor_symbols(text_incor):
     # функция, оставляющая в строке только русские буквы и пробелы
-
+    
+    text_incor = replacement_punc_to_space(text_incor)
+    
     text_incor = text_incor.lower()
 
     cor_symbols = [" "]
 
-    for i in range(ord('а'), ord('я')):
+    for i in range(ord('а'), ord('я')+1):
         cor_symbols.append(chr(i))
 
     text_cor = ""
@@ -101,7 +112,8 @@ def main_for_all(vk_api):
     st.markdown(html_temp, unsafe_allow_html=True)
 
     st.info("Обработка естественного языка (на русском языке)")
-    raw_text = st.text_area("Введите текст на русском языке", "поле ввода")
+    raw_text = st.text_area("Введите текст на русском языке",
+                            "Я помню чудное мгновенье:\nПередо мной явилась ты,\nКак мимолетное виденье,\nКак гений чистой красоты.")
     if st.button("Проанализировать"):
         try:
             text_analizer_rus_st(raw_text)
@@ -116,7 +128,8 @@ def main_for_all(vk_api):
             'Например 2b83a7172b63a7656ghb7178428708a0522b632b63a7873f7c594b6fda2224149cvd0e'
             )
     domain = st.text_input(
-        'Введите короткий адрес пользователя или сообщества "-"', 'habr'
+        'Введите короткий адрес пользователя или сообщества',
+        'Например habr'
         )
 
     if st.button("Проанализировать новостные заголовки"):

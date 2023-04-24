@@ -3,10 +3,10 @@ from locust import HttpUser, task, between
 
 # Класс AppUser имитирует выполнение HTTP-запросов на указанной странице используя импортированный класс HttpUser
 class AppUser(HttpUser):
-    wait_time = between(5, 10) # интервал выполнения HTTP-запросов на странице (в секундах)
+    wait_time = between(5, 10)  # интервал выполнения HTTP-запросов на странице (в секундах)
 
-    @task # В task описываются действия при каждом HTTP-запросе
-    def get_page(self): # Функция внешнего запроса страницы
+    @task  # В task описываются действия при каждом HTTP-запросе
+    def get_page(self):  # Функция внешнего запроса страницы
         self.client.get('/')
 
 

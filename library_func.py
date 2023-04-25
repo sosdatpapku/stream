@@ -117,7 +117,7 @@ def main_for_all(vk_api):
     if st.button("Проанализировать"):
         try:
             text_analizer_rus_st(raw_text)
-        except:
+        except BaseException:
             st.markdown('Введённые данные некорректны')
 
     st.info("Обработка естественного языка (VK)")
@@ -145,7 +145,7 @@ def main_for_all(vk_api):
             text_analizer_rus_st(str(all_news))
             # подаём на функцию данные одновременно переводя их в тип str
 
-        except:
+        except BaseException:
             st.markdown('Что-то пошло не так')
 
     st.sidebar.subheader('''Исполнители: группа №2:

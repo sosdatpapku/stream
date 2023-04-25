@@ -24,9 +24,9 @@ def replacement_punc_to_space(text_punc):
 
 def remove_incor_symbols(text_incor):
     # функция, оставляющая в строке только русские буквы и пробелы
-    
+
     text_incor = replacement_punc_to_space(text_incor)
-    
+
     text_incor = text_incor.lower()
 
     cor_symbols = [" "]
@@ -40,7 +40,7 @@ def remove_incor_symbols(text_incor):
         if symbol in cor_symbols:
             text_cor += symbol
 
-    return(text_cor)
+    return (text_cor)
 
 
 def text_analizator_rus(text_in):
@@ -124,7 +124,7 @@ def main_for_all(vk_api):
     count = st.slider('Сколько новостных заголовков извлечь?', 1, 100, 5)
     if vk_api == 'vk.API(access_token=token)':
         token = st.text_input(
-            'Установите Ваш токен из Вашего приложения в vk         (данное действие может быть небезопасно)', 
+            'Установите Ваш токен из Вашего приложения в vk         (данное действие может быть небезопасно)',
             'Например 2b83a7172b63a7656ghb7178428708a0522b632b63a7873f7c594b6fda2224149cvd0e'
             )
     domain = st.text_input(
@@ -133,7 +133,7 @@ def main_for_all(vk_api):
         )
 
     if st.button("Проанализировать новостные заголовки"):
-        
+    
         try:
             api = eval(vk_api)  # адрес токена вк
             posts = api.wall.get(domain=domain, count=count, v=5.151)
@@ -155,5 +155,3 @@ def main_for_all(vk_api):
     Гаврилин Пётр Александрович''')
 
     return None
-
-

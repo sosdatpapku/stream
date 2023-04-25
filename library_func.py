@@ -14,7 +14,7 @@ matplotlib.use("Agg")
 
 
 def replacement_punc_to_space(text_punc):
-    punc_list = '.;:!?/\,#@$&)(\'"'
+    punc_list = '.;:!?/,#@$&)(\'"'
     replacement = ' ' * len(punc_list)
 
     text_bez_punc = text_punc.translate(str.maketrans(punc_list, replacement))
@@ -113,7 +113,8 @@ def main_for_all(vk_api):
 
     st.info("Обработка естественного языка (на русском языке)")
     raw_text = st.text_area("Введите текст на русском языке",
-                            "Я помню чудное мгновенье:\nПередо мной явилась ты,\nКак мимолетное виденье,\nКак гений чистой красоты.")
+                            "Я помню чудное мгновенье:\nПередо мной явилась ты,\n
+                            Как мимолетное виденье,\nКак гений чистой красоты.")
     if st.button("Проанализировать"):
         try:
             text_analizer_rus_st(raw_text)
@@ -133,7 +134,7 @@ def main_for_all(vk_api):
         )
 
     if st.button("Проанализировать новостные заголовки"):
-    
+
         try:
             api = eval(vk_api)  # адрес токена вк
             posts = api.wall.get(domain=domain, count=count, v=5.151)

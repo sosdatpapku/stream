@@ -13,7 +13,7 @@ class AppUser(HttpUser):
 """
 Алгоритм воспроизведения теста
 1) Запускаем наше приложение на облаке streamlit через команду
-streamlit run library_func.py
+streamlit run main_application_1.py
 2) Запускаем веб-интерфейс locust для нашего теста через команду
 locust -f locust_test.py
 3) Переходим по ссылке http://localhost:8089
